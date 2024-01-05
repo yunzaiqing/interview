@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <a href="https://zhuanlan.zhihu.com/p/618106916">执行上下文</a>
+    <p>执行上下文是评估和执行js代码的环境的抽象概念，js代码运行时都是在执行上下文中运行的，简单来说就是当前代码的执行环境</p>
+    <p>全局执行上下文</p>
+    <p>函数执行上下文</p>
+    <p>eval执行上下文</p>
+</body>
+<script>
+    // 1.this绑定
+    // let foo = {
+    //     baz: function () {
+    //         console.log(this)
+    //     }
+    // }
+
+    // foo.baz(); //{baz:f}
+
+    // let a = foo.baz
+
+    // a(); // window对象
+
+    // 题目1
+    // console.log(a)
+    // var a = 1
+
+    // undefined 因为变量提升了但赋值没有提升
+
+    // 题目2
+    // function foo() {
+    //     console.log('foo1')
+    // }
+
+    // foo() // foo2
+
+    // function foo() {
+    //     console.log('foo2')
+    // }
+
+    // foo() // foo2
+
+    // js中的代码并非一行一行执行，而是一段段执行，同时分为准备阶段和执行阶段，
+    // 准备阶段存在变量提升和函数提升，然后才执行，第二个foo()在准备阶段被提升了
+    // 重点 函数会提升 提升之后就覆盖了
+
+    // 题目3
+    // var message = 'global'
+
+    // function foo() {
+    //     console.log(message)
+    //     console.log(this) 
+    // }
+
+    // function bar() {
+    //     var message = 'Bar'
+    //     foo()
+    // }
+
+    // bar() // global  window
+    // 执行foo()的时候创建了一个新的执行上下文，会根据作用于调用message，
+    // 往上寻找到第一个message，也就是全局
+    // bar中声明的message，是在bar这个作用域内
+    // 在bar中调用foo（）这里只是执行调用，实际我们需要找的是在解释阶段生成的foo的父级作用域，
+    // 所以foo的父级作用域是全局，
+
+    // 题目四
+    // var foo = function () {
+    //     console.log('foo1')
+    // }
+    // foo() // foo1
+    // var foo = function () {
+    //     console.log('foo2')
+    // }
+    // foo() // foo2
+    // 这两段代码的区别是上一个是函数执行栈，下一个是变量提升 但是赋值没有提升 
+</script>
+
+</html>
